@@ -1,5 +1,5 @@
 .settings/* linguist-vendored
-.Debug/* linguist-vendored
-.include/* linguist-vendored
-.ldscripts/* linguist-vendored
-.system/* linguist-vendored
+Debug/* linguist-vendored
+include/* linguist-vendored
+ldscripts/* linguist-vendored
+system/* linguist-vendored
