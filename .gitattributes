@@ -3,3 +3,4 @@ Debug/* linguist-vendored
 include/* linguist-vendored
 ldscripts/* linguist-vendored
 system/* linguist-vendored
+carousel/src/_write.c linguist-vendored
