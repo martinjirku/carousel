@@ -59,13 +59,16 @@ main(int argc, char* argv[])
 {
 	// At this stage the system clock should have already been configured
 	// at high speed.
-	trace_puts("App loop being created!");
+	trace_puts("OS is initialized...");
 	MJOS os;
-	trace_puts("Carousel being created!");
-	Carousel carousel(os);
-	trace_puts("Loop being created!");
+	Carousel_view view;
 
-	os.start();
+	trace_puts("App: Carousel is initialized...");
+	Carousel carousel(os, view);
+	carousel.Start();
+
+	trace_puts("OS started!");
+	os.Start();
 
 }
 

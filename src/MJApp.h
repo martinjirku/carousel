@@ -14,6 +14,6 @@ class MJApp {
 public:
 	MJApp(MJOS& os);
 
-private:
-	MJOS os;
+protected:
+	MJOS* os;
 };

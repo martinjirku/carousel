@@ -14,13 +14,13 @@ MJOS::MJOS() {
 	SysTick_Config(SystemCoreClock / FREQUENCY_HZ);
 }
 
-void MJOS::start() {
+void MJOS::Start() {
 	while(true) {
-		currentTime++;
+		current_time++;
 		// find timeouts to reschedule or delay
 		std::vector<async_id_t> timersToRemove {};
 		for (auto const& it: this->timers) {
-			if (it.second.lastTick == currentTime) {
+			if (it.second.lastTick == current_time) {
 				timersToRemove.push_back(it.first);
 			}
 		}
@@ -28,25 +28,26 @@ void MJOS::start() {
 		for(auto const& value: timersToRemove) {
 			timers[value].fn();
 			if (timers[value].repeat) {
-				timers[value].lastTick = currentTime + timers[value].delay;
+				timers[value].lastTick = current_time + timers[value].delay;
 			} else {
-				this->cancelTimer(value);
+				this->Cancel_timer(value);
 			}
 		}
 	}
 }
 
-async_id_t MJOS::timer(std::function<void ()> callback, ticks_t time, bool repeat) {
+async_id_t MJOS::Timer(std::function<void ()> callback, ticks_t time, bool repeat) {
 	ids++;
-	this->timers[ids] = TimerEntry { callback,  time, time + currentTime, repeat };
+	ticks_t transformed_time = time * 100;
+	this->timers[ids] = Timer_entry { callback,  transformed_time, transformed_time + current_time, repeat };
 	return ids;
 }
 
-async_id_t MJOS::timer(std::function<void ()> callback, ticks_t time) {
-	return this->timer(callback, time, false);
+async_id_t MJOS::Timer(std::function<void ()> callback, ticks_t time) {
+	return this->Timer(callback, time, false);
 }
 
-void MJOS::cancelTimer(async_id_t timer_id) {
+void MJOS::Cancel_timer(async_id_t timer_id) {
 	// todo: does it really remove from memory?
 	this->timers.erase(timer_id);
 }

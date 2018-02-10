@@ -8,6 +8,7 @@
 #pragma once
 
 #include "MJApp.h"
+#include "Carousel_view.h"
 
 struct ERotation {
 	enum type {
@@ -16,23 +17,29 @@ struct ERotation {
 };
 
 class Carousel : MJApp {
-typedef int degrees_per_second_t; // degrees per second
 
 public:
-	Carousel(MJOS& os);
+	Carousel(MJOS& os, Carousel_view& view);
 	void Start();
-	void ToggleRotation();
-	void WriteResponse();
+	void Toggle_rotation();
+	void Write_response();
 
-	int getPosition() const;
-	void setPosition(int);
-	ERotation::type getRotation() const;
-	void setRotation(ERotation::type rotation);
-	degrees_per_second_t getSpeed() const;
-	void setSpeed(degrees_per_second_t);
+	int Get_position() const;
+	ERotation::type Get_rotation() const;
+	void Set_rotation(ERotation::type rotation);
+	void Increase_speed();
+	void Increase_speed(int);
 
 private:
-	degrees_per_second_t speed = 180;
+	static constexpr int MAX_POSITION = 7;
+	static constexpr int DEFAULT_SPEED = 125;
+
+	ticks_t speed;
+	async_id_t async_id = 0;
+	Carousel_view view;
+
 	int position = 0;
 	ERotation::type rotation = ERotation::CCW;
+	void Set_next_position();
+	void Set_position(int position);
 };

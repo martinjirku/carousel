@@ -9,5 +9,5 @@
 #include "MJApp.h"
 
 MJApp::MJApp(MJOS& os) {
-	this->os = os;
+	this->os = &os;
 }
