@@ -7,12 +7,11 @@
 
 #include "Carousel.h"
 #include "diag/Trace.h"
-#include "AppLoop.h"
 
-Carousel::Carousel(AppLoop aloop) : App(aloop) {
+Carousel::Carousel(MJOS &os) : MJApp(os) {
 	uint32_t i = 4;
 	ticks_t time = 10;
-	aloop.setTimeout([&]() -> void {
+	os.timer([&]() -> void {
 		trace_printf("comming from lambda %u", i);
 	}, time);
 }

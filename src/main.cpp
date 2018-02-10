@@ -27,13 +27,10 @@
 
 // ----------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "MJOS.h"
 #include "diag/Trace.h"
 
-#include "AppLoop.h"
 #include "Carousel.h"
-#include "diag/Trace.h"
 
 // ----------------------------------------------------------------------------
 //
@@ -63,12 +60,12 @@ main(int argc, char* argv[])
 	// At this stage the system clock should have already been configured
 	// at high speed.
 	trace_puts("App loop being created!");
-	AppLoop appLoop;
+	MJOS os;
 	trace_puts("Carousel being created!");
-	Carousel carousel(appLoop);
+	Carousel carousel(os);
 	trace_puts("Loop being created!");
 
-	appLoop.start();
+	os.start();
 
 }
 

@@ -5,10 +5,9 @@
  *      Author: Martin Jirku
  */
 
-#ifndef CAROUSEL_H_
-#define CAROUSEL_H_
+#pragma once
 
-#include "AppLoop.h"
+#include "MJApp.h"
 
 struct ERotation {
 	enum type {
@@ -16,11 +15,11 @@ struct ERotation {
 	};
 };
 
-class Carousel : App {
+class Carousel : MJApp {
 typedef int degrees_per_second_t; // degrees per second
 
 public:
-	Carousel(AppLoop);
+	Carousel(MJOS& os);
 	void Start();
 	void ToggleRotation();
 	void WriteResponse();
@@ -37,5 +36,3 @@ private:
 	int position = 0;
 	ERotation::type rotation = ERotation::CCW;
 };
-
-#endif /* CAROUSEL_H_ */
